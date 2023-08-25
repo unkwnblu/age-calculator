@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,400;1,800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+@apply bg-slate-100 p-8 lg:p-0;
+}
+
+label {
+  @apply block uppercase font-bold mb-2;
+}
+
+input {
+  @apply bg-transparent border border-purple-600 w-full py-3 px-4 rounded text-3xl placeholder-slate-400 focus:ring-4 focus:ring-purple-600 transition-all duration-150 focus:border-purple-600 outline-none;
+}
