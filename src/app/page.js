@@ -15,18 +15,23 @@ export default function Home() {
   const [months, setMonths] = useState("");
   const [years, setYears] = useState("");
 
-  const diffInDays = differenceInDays(
-    new Date(years, months, 31),
-    new Date(years, months, days)
-  );
-  const diffInMonths = differenceInMonths(
-    new Date(years, 12, days),
-    new Date(years, months, days)
-  );
-  const diffInYears = differenceInYears(
-    new Date(2023, months, days),
-    new Date(years, months, days)
-  );
+  const today = new Date();
+  const birthDate = new Date(years, months - 1, days); // JS months are 0-based
+  
+  const isValidDate = birthDate instanceof Date && !isNaN(birthDate.getTime()) && birthDate < today;
+  
+  const diffInYears = isValidDate ? differenceInYears(today, birthDate) : "--";
+  const diffInMonths = isValidDate ? differenceInMonths(today, birthDate) % 12 : "--";
+
+// Recalculate days by subtracting full months and years to get accurate leftover days
+let diffInDays = "--";
+if (isValidDate) {
+  const yearPart = birthDate.getFullYear() + diffInYears;
+  const monthPart = birthDate.getMonth() + diffInMonths;
+  const monthAdjustedDate = new Date(yearPart, monthPart, birthDate.getDate());
+
+  diffInDays = differenceInDays(today, monthAdjustedDate);
+}
 
   return (
     <>
