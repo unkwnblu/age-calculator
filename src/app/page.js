@@ -16,14 +16,13 @@ export default function Home() {
   const [years, setYears] = useState("");
 
   const today = new Date();
-  const birthDate = new Date(years, months - 1, days); // JS months are 0-based
+  const birthDate = new Date(years, months - 1, days); 
   
   const isValidDate = birthDate instanceof Date && !isNaN(birthDate.getTime()) && birthDate < today;
   
   const diffInYears = isValidDate ? differenceInYears(today, birthDate) : "--";
   const diffInMonths = isValidDate ? differenceInMonths(today, birthDate) % 12 : "--";
 
-// Recalculate days by subtracting full months and years to get accurate leftover days
 let diffInDays = "--";
 if (isValidDate) {
   const yearPart = birthDate.getFullYear() + diffInYears;
